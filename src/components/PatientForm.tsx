@@ -1,5 +1,6 @@
 //importando useForm de react-hook-form
 import { useForm } from 'react-hook-form'
+import Errors from './Errors';
 
 export default function PatientForm() {
 
@@ -39,7 +40,11 @@ export default function PatientForm() {
                             required: 'EL nombre del paciente es obligatorio'
                         })}
                     />
-                    {errors.name?.message}
+                    {errors.name && (
+                        <Errors>
+                            {errors.name?.message?.toString()}
+                        </Errors>
+                    )}
                 </div>
 
                 <div className="mb-5">
@@ -50,8 +55,17 @@ export default function PatientForm() {
                         id="caretaker"
                         className="w-full p-3  border border-gray-100"  
                         type="text" 
-                        placeholder="Nombre del Propietario" 
+                        placeholder="Nombre del Propietario"
+                        //Aqui es donde se ingresa el register de useForm
+                        {...register('caretaker', {
+                            required: 'El propietario es obligatorio'
+                        })}
                     />
+                    {errors.caretaker && (
+                        <Errors>
+                            {errors.caretaker?.message?.toString()}
+                        </Errors>
+                    )}
                 </div>
 
                 <div className="mb-5">
@@ -63,8 +77,20 @@ export default function PatientForm() {
                     className="w-full p-3  border border-gray-100"  
                     type="email" 
                     placeholder="Email de Registro" 
+                    {...register("email", {
+                        required: "El Email es Obligatorio",
+                        pattern: {
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                            message: 'Email No Válido'
+                        }
+                    })} 
                 />
-                </div>
+                {errors.email && (
+                    <Errors>
+                        {errors.email?.message?.toString()}
+                    </Errors>
+                )}
+            </div>
 
                 <div className="mb-5">
                     <label htmlFor="date" className="text-sm uppercase font-bold">
@@ -73,8 +99,17 @@ export default function PatientForm() {
                     <input  
                         id="date"
                         className="w-full p-3  border border-gray-100"  
-                        type="date" 
+                        type="date"
+                        //Aqui es donde se ingresa el register de useForm
+                        {...register('date', {
+                            required: 'La fecha de alta es obligatoria'
+                        })}
                     />
+                    {errors.date && (
+                        <Errors>
+                            {errors.date?.message?.toString()}
+                        </Errors>
+                    )}
                 </div>
                 
                 <div className="mb-5">
@@ -84,8 +119,17 @@ export default function PatientForm() {
                     <textarea  
                         id="symptoms"
                         className="w-full p-3  border border-gray-100"  
-                        placeholder="Síntomas del paciente" 
-                    ></textarea>
+                        placeholder="Síntomas del paciente"
+                        //Aqui es donde se ingresa el register de useForm
+                        {...register('symptoms', {
+                            required: 'Los sintomas son obligatorios'
+                        })}
+                    />
+                    {errors.symptoms && (
+                        <Errors>
+                            {errors.symptoms?.message?.toString()}
+                        </Errors>
+                    )}
                 </div>
 
                 <input
