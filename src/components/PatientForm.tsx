@@ -1,15 +1,15 @@
 //importando useForm de react-hook-form
 import { useForm } from 'react-hook-form'
 import Errors from './Errors';
+import { DraftPatient } from '../types';
 
 export default function PatientForm() {
 
     //Mandando a llamar a useForm
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors } } = useForm<DraftPatient>()
 
-    const registerPatient = () => {
-        console.log('Nuevo paciente');
-        
+    const registerPatient = (data: DraftPatient) => {
+        console.log(data);
     }
 
     return (
@@ -42,7 +42,7 @@ export default function PatientForm() {
                     />
                     {errors.name && (
                         <Errors>
-                            {errors.name?.message?.toString()}
+                            {errors.name?.message}
                         </Errors>
                     )}
                 </div>
@@ -63,7 +63,7 @@ export default function PatientForm() {
                     />
                     {errors.caretaker && (
                         <Errors>
-                            {errors.caretaker?.message?.toString()}
+                            {errors.caretaker?.message}
                         </Errors>
                     )}
                 </div>
@@ -87,7 +87,7 @@ export default function PatientForm() {
                 />
                 {errors.email && (
                     <Errors>
-                        {errors.email?.message?.toString()}
+                        {errors.email?.message}
                     </Errors>
                 )}
             </div>
@@ -107,7 +107,7 @@ export default function PatientForm() {
                     />
                     {errors.date && (
                         <Errors>
-                            {errors.date?.message?.toString()}
+                            {errors.date?.message}
                         </Errors>
                     )}
                 </div>
@@ -127,7 +127,7 @@ export default function PatientForm() {
                     />
                     {errors.symptoms && (
                         <Errors>
-                            {errors.symptoms?.message?.toString()}
+                            {errors.symptoms?.message}
                         </Errors>
                     )}
                 </div>
