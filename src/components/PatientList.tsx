@@ -1,7 +1,7 @@
 import { usePatientStore } from "../store/store"
 import PatientDetail from "./PatientDetail"
 
-export default function PatientList() {
+export default function PatientList({}) {
 
     const patients = usePatientStore((state) => state.patients)
     
@@ -19,7 +19,7 @@ export default function PatientList() {
                         {patients.map(patient => (
                             <PatientDetail 
                                 key={patient.id}
-                                patient={patient.name}
+                                patient={patient}
                             />
                         ))}
                     </p>
