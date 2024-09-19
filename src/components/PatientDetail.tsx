@@ -9,6 +9,7 @@ type PatientDetailProps = {
 export default function PatientDetail({patient}: PatientDetailProps) {
 
     const deletePatient = usePatientStore((state) => state.deletePatient)
+    const getPatientById = usePatientStore((state) => state.getPatientById)
 
     return (
 
@@ -20,11 +21,12 @@ export default function PatientDetail({patient}: PatientDetailProps) {
             <PatientDetailItem label="Fecha de la cita" data={patient.date.toString()} />
             <PatientDetailItem label="Sintomas" data={patient.symptoms} />
 
-            <div className="flex justify-end gap-5 mt-10">
+            <div className="flex flex-col lg:flex-row justify-end gap-5 mt-10">
                 {/* Boton de editar */}
                 <button
                     type="button"
                     className="py-2 px-10 bg-white border border-indigo-800 hover:bg-indigo-800 text-indigo-600 hover:text-white font-bold uppercase rounded-lg"
+                    onClick={() => getPatientById(patient.id)}
                 >Editar</button>
                 {/* Boton de eliminar */}
                 <button
