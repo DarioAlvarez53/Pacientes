@@ -10,6 +10,7 @@ export default function PatientForm() {
     const addPatient = usePatientStore(state => state.addPatient)
     const activeId = usePatientStore(state => state.activeId)
     const patients = usePatientStore(state => state.patients)
+    const updatePatient = usePatientStore(state => state.updatePatient)
     
 
     //Mandando a llamar a useForm
@@ -32,7 +33,11 @@ export default function PatientForm() {
     }, [activeId])
 
     const registerPatient = (data: DraftPatient) => {
-        addPatient(data)
+        if(activeId) {
+            updatePatient(data)
+        } else {
+            addPatient(data)
+        }
         //Una vez que se agrega al paciente el formulario se resetea
         reset()
     }
@@ -159,8 +164,8 @@ export default function PatientForm() {
 
                 <input
                     type="submit"
-                    className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors"
-                    value='Guardar Paciente'
+                    className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors rounded-lg"
+                    value={activeId ? "Actualizar registro" : "Guardar paciente"}
                 />
             </form> 
         </div>
