@@ -14,6 +14,19 @@ export default function PatientDetail({patient}: PatientDetailProps) {
             <PatientDetailItem label="Correo electronico" data={patient.email} />
             <PatientDetailItem label="Fecha de la cita" data={patient.date.toString()} />
             <PatientDetailItem label="Sintomas" data={patient.symptoms} />
+
+            <div className="flex justify-end gap-5 mt-10">
+                {/* Boton de editar */}
+                <button
+                    type="button"
+                    className="py-2 px-10 bg-white border border-indigo-800 hover:bg-indigo-800 text-indigo-600 hover:text-white font-bold uppercase rounded-lg"
+                >Editar</button>
+                {/* Boton de eliminar */}
+                <button
+                    type="button"
+                    className="py-2 px-10 bg-white border border-red-600 hover:bg-red-600 text-red-600 hover:text-white font-bold uppercase rounded-lg"
+                >Eliminar</button>
+            </div>
         </div>
     )
 }

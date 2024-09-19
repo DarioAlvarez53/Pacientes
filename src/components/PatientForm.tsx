@@ -9,10 +9,13 @@ export default function PatientForm() {
     const { addPatient } = usePatientStore()
 
     //Mandando a llamar a useForm
-    const { register, handleSubmit, formState: { errors } } = useForm<DraftPatient>()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<DraftPatient>()
 
     const registerPatient = (data: DraftPatient) => {
         addPatient(data)
+        //Una vez que se agrega al paciente el formulario se resetea
+        reset()
+
     }
 
     return (
