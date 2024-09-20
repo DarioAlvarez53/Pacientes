@@ -1,9 +1,10 @@
 //importando useForm de react-hook-form
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import Errors from './Errors';
 import { DraftPatient } from '../types';
 import { usePatientStore } from '../store/store';
-import { useEffect } from 'react';
 
 export default function PatientForm() {
 
@@ -11,7 +12,6 @@ export default function PatientForm() {
     const activeId = usePatientStore(state => state.activeId)
     const patients = usePatientStore(state => state.patients)
     const updatePatient = usePatientStore(state => state.updatePatient)
-    
 
     //Mandando a llamar a useForm
     const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm<DraftPatient>()
@@ -35,8 +35,12 @@ export default function PatientForm() {
     const registerPatient = (data: DraftPatient) => {
         if(activeId) {
             updatePatient(data)
+            //Notificacion flotante cuando se actualice un registro
+            toast.info('Paciente actualizado correctamente')
         } else {
             addPatient(data)
+            //Notificacion flotante cuando se agregue un nuevo registro
+            toast.success('Paciente registrado correctamente')
         }
         //Una vez que se agrega al paciente el formulario se resetea
         reset()
