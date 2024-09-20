@@ -1,7 +1,7 @@
 //Aqui van a vivir el state y las acciones de manera global
 //La forma de crear un store es importando "create"
 import { create } from "zustand"
-import { devtools } from "zustand/middleware"
+import { createJSONStorage, devtools, persist } from "zustand/middleware" //persist nos va a permitir tener un estado persistente
 import { v4 as uuidv4} from 'uuid'
 import { DraftPatient, Patient } from "../types"
 
@@ -20,7 +20,9 @@ const createPatient = (patient: DraftPatient) : Patient => {
 
 //Aqui se va colocar tanto el state como las funciones que modificaran al state
 export const usePatientStore = create<PatientState>()(
-    devtools((set) => ({  /* aqui se pueden pasar un par de funciones (set, get) set es para ageregar un valor, y get es para recibir un valor */
+    devtools(
+        persist(
+        (set) => ({  /* aqui se pueden pasar un par de funciones (set, get) set es para ageregar un valor, y get es para recibir un valor */
         patients: [],
         activeId: '',
         addPatient: (data) => {
@@ -53,5 +55,9 @@ export const usePatientStore = create<PatientState>()(
                 activeId: ''
             }))
         }
+    }),{
+        //Aqui van las opciones de persist
+        name: 'patient-storage',
+        // storage: createJSONStorage(() => localStorage) este es el que viene por defecto pero se puede cambiar a sessionStorage
     })
 ))
